@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Startseite</title>
+    <title>Pokedex</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="src\css\styles.css">
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="icon" href="src/img/pokeball.png">
     <script src="src/js/include.js"></script>
     <script src="src/js/script.js"></script>
     <script src="src/js/localStorage.js"></script>
@@ -14,7 +15,7 @@
 
 <!--<body onload="includeHTML()">-->
 
-<body>
+<body onload="init()">
 
     <main>
 
@@ -22,11 +23,174 @@
         <article>
             <section>
                 <!--<div w3-include-html="src/templates/nav.html"></div>-->
-
+                <img id="pokeball" src="src/img/pokeball.png" alt="">
             </section>
 
             <section>
+                <div class="container">
 
+                    <nav class="navbar navbar-light bg-light">
+                        <div class="container-fluid">
+                            <a class="navbar-brand">Pokedex</a>
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            </form>
+                        </div>
+                    </nav>
+
+                    <div class="row m-3">
+
+
+                        <div class="mb-3 col-xl-3 col-lg-4 col-md-6">
+                            <div class="pokecontainer" style="background-color: var(--fire);">
+                                <div class="m-1 ">
+                                    <h2>Charmander</h2>
+                                </div>
+                                <div class="pokeContainerLowerBox row ">
+                                    <div class="m-0 p-0 pokeTypes col-4 ">
+                                        <p class="pokeType1 " style="background-color: var(--fire);color: white; ">Feuer</p>
+                                        <p class="pokeType2 d-none ">222</p>
+                                    </div>
+                                    <div class="m-0 p-0 col-8 ">
+                                        <img class="pokePic " src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png " alt=" ">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3 col-xl-3 col-lg-4 col-md-6">
+                            <div class="pokecontainer" style="background-color: var(--fire);">
+                                <div class="m-1 ">
+                                    <h2>Charmander</h2>
+                                </div>
+                                <div class="pokeContainerLowerBox row ">
+                                    <div class="m-0 p-0 pokeTypes col-4 ">
+                                        <p class="pokeType1 " style="background-color: var(--fire);color: white; ">Feuer</p>
+                                        <p class="pokeType2 d-none ">222</p>
+                                    </div>
+                                    <div class="m-0 p-0 col-8 ">
+                                        <img class="pokePic " src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png " alt=" ">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3 col-xl-3 col-lg-4 col-md-6">
+                            <div class="pokecontainer" style="background-color: var(--fire);">
+                                <div class="m-1 ">
+                                    <h2>Charmander</h2>
+                                </div>
+                                <div class="pokeContainerLowerBox row ">
+                                    <div class="m-0 p-0 pokeTypes col-4 ">
+                                        <p class="pokeType1 " style="background-color: var(--fire);color: white; ">Feuer</p>
+                                        <p class="pokeType2 d-none ">222</p>
+                                    </div>
+                                    <div class="m-0 p-0 col-8 ">
+                                        <img class="pokePic " src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png " alt=" ">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3 col-xl-3 col-lg-4 col-md-6">
+                            <div class="pokecontainer" style="background-color: var(--fire);">
+                                <div class="m-1 ">
+                                    <h2>Charmander</h2>
+                                </div>
+                                <div class="pokeContainerLowerBox row ">
+                                    <div class="m-0 p-0 pokeTypes col-4 ">
+                                        <p class="pokeType1 " style="background-color: var(--fire);color: white; ">Feuer</p>
+                                        <p class="pokeType2 d-none ">222</p>
+                                    </div>
+                                    <div class="m-0 p-0 col-8 ">
+                                        <img class="pokePic " src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png " alt=" ">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3 col-xl-3 col-lg-4 col-md-6">
+                            <div class="pokecontainer" style="background-color: var(--fire);">
+                                <div class="m-1 ">
+                                    <h2>Charmander</h2>
+                                </div>
+                                <div class="pokeContainerLowerBox row ">
+                                    <div class="m-0 p-0 pokeTypes col-4 ">
+                                        <p class="pokeType1 " style="background-color: var(--fire);color: white; ">Feuer</p>
+                                        <p class="pokeType2 d-none ">222</p>
+                                    </div>
+                                    <div class="m-0 p-0 col-8 ">
+                                        <img class="pokePic " src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png " alt=" ">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3 col-xl-3 col-lg-4 col-md-6">
+                            <div class="pokecontainer" style="background-color: var(--fire);">
+                                <div class="m-1 ">
+                                    <h2>Charmander</h2>
+                                </div>
+                                <div class="pokeContainerLowerBox row ">
+                                    <div class="m-0 p-0 pokeTypes col-4 ">
+                                        <p class="pokeType1 " style="background-color: var(--fire);color: white; ">Feuer</p>
+                                        <p class="pokeType2 d-none ">222</p>
+                                    </div>
+                                    <div class="m-0 p-0 col-8 ">
+                                        <img class="pokePic " src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png " alt=" ">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3 col-xl-3 col-lg-4 col-md-6">
+                            <div class="pokecontainer" style="background-color: var(--fire);">
+                                <div class="m-1 ">
+                                    <h2>Charmander</h2>
+                                </div>
+                                <div class="pokeContainerLowerBox row ">
+                                    <div class="m-0 p-0 pokeTypes col-4 ">
+                                        <p class="pokeType1 " style="background-color: var(--fire);color: white; ">Feuer</p>
+                                        <p class="pokeType2 d-none ">222</p>
+                                    </div>
+                                    <div class="m-0 p-0 col-8 ">
+                                        <img class="pokePic " src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png " alt=" ">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3 col-xl-3 col-lg-4 col-md-6">
+                            <div class="pokecontainer" style="background-color: var(--fire);">
+                                <div class="m-1 ">
+                                    <h2>Charmander</h2>
+                                </div>
+                                <div class="pokeContainerLowerBox row ">
+                                    <div class="m-0 p-0 pokeTypes col-4 ">
+                                        <p class="pokeType1 " style="background-color: var(--fire);color: white; ">Feuer</p>
+                                        <p class="pokeType2 d-none ">222</p>
+                                    </div>
+                                    <div class="m-0 p-0 col-8 ">
+                                        <img class="pokePic " src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png " alt=" ">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
             </section>
 
 
@@ -38,7 +202,33 @@
 
     </footer>
 
-
+    <!--<div class="language ">
+                                    <button>DEU</button>
+                                    <button>ENG</button>
+                                </div>
+                                <div class="outerBox row ">
+                                    <div class="pokeImgContainer col-4 ">
+                                        <img class="pokeImg " src="src/img/pokeball.png " alt=" ">
+                                    </div>
+                                    <div class="infoBox col-8 ">
+                                        <div class="selector ">
+                                            <button id="arrowBtnUp " class="arrowBtn "><img src="src/img/up.png " alt=" "></button>
+                                            <div class="selectorInfoBox ">
+                                                <div>
+                                                    <img id="pokeGif " src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/329.gif " alt=" " id="gifPoke ">
+                                                </div>
+                                                <p>Nr.322</p>
+                                                <p>Vibrava</p>
+                                                <div class="gender ">
+                                                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/329.gif " alt=" " id="male ">
+                                                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/329.gif " alt=" " id="female ">
+                                                </div>
+                                            </div>
+                                            <button id="arrowBtnDown " class="arrowBtn "><img src="src/img/down.png " alt=" "></button>
+                                        </div>
+                                        <p>details</p>
+                                    </div>
+                                </div>-->
 </body>
 
 </html>

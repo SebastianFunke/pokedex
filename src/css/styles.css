@@ -19,6 +19,27 @@
     font-weight: normal;
 }
 
+:root {
+    --normal: rgb(78, 74, 34);
+    --fire: rgb(221, 100, 44);
+    --water: rgb(6, 100, 138);
+    --plant: rgb(41, 177, 36);
+    --electro: rgb(197, 183, 31);
+    --ice: rgb(72, 202, 196);
+    --fight: rgb(95, 9, 9);
+    --poison: rgb(85, 16, 124);
+    --earth: rgb(153, 145, 60);
+    --flight: rgb(85, 74, 128);
+    --psycho: rgb(196, 101, 141);
+    --beetle: rgb(90, 151, 65);
+    --stone: rgb(133, 130, 103);
+    --ghost: rgb(90, 12, 126);
+    --dragon: rgb(36, 35, 114);
+    --unlight: rgb(129, 79, 22);
+    --steel: rgb(184, 183, 173);
+    --fee: rgb(225, 139, 236);
+}
+
 .centerAll {
     display: flex;
     justify-content: center;
@@ -41,4 +62,141 @@
     display: flex;
     justify-content: space-between;
     align-content: center;
+}
+
+#pokeball {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    transform: scale(0);
+    left: 100%;
+    top: 20%;
+}
+
+.arrowBtn {
+    border: none;
+    background-color: transparent;
+    filter: brightness(80%);
+    transform: scale(0.6);
+    margin: 0;
+    padding: 0;
+}
+
+.arrowBtn:hover {
+    filter: brightness(20%);
+}
+
+.movepokeball {
+    animation: showPokeball2 325ms linear;
+}
+
+@keyframes showPokeball2 {
+    0% {
+        left: 25%;
+        top: 25%;
+        transform: rotateZ(0deg);
+    }
+    100% {
+        left: 50%;
+        top: 50%;
+        transform: rotateZ(360deg) scale(20);
+    }
+}
+
+.pokecontainer {
+    border: 1px solid black;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.308);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    border-radius: 8px;
+    transition: transform 225ms ease-in-out;
+    background-image: url("../img/pokeball_white.png");
+    background-position: 90% 90%;
+    background-size: 60%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.pokecontainer:hover {
+    transform: translateY(-0.5em);
+}
+
+body {
+    box-sizing: border-box;
+}
+
+.pokeContainerLowerBox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.pokePic {
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+.pokeTypes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 80%;
+}
+
+.pokeTypes p {
+    padding: 0.5em;
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 90%;
+    margin-left: 1em;
+}
+
+.outerBox {
+    display: flex;
+    align-items: center;
+}
+
+.infoBox {
+    padding: 0.6em;
+    width: 60%;
+}
+
+.selector {
+    display: flex;
+    justify-content: center;
+    align-items: space-evenly;
+    flex-direction: column;
+    background-color: cornsilk;
+    border-radius: 8px;
+}
+
+.selectorInfoBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    flex-wrap: nowrap;
+}
+
+.selectorInfoBox p {
+    margin: 0;
+}
+
+#pokeGif {
+    width: 100%;
+}
+
+.gender {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.gender img {
+    width: 49%;
 }
