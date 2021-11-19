@@ -23,21 +23,21 @@
     --normal: rgb(78, 74, 34);
     --fire: rgb(221, 100, 44);
     --water: rgb(6, 100, 138);
-    --plant: rgb(41, 177, 36);
-    --electro: rgb(197, 183, 31);
+    --grass: rgb(41, 177, 36);
+    --electric: rgb(197, 183, 31);
     --ice: rgb(72, 202, 196);
-    --fight: rgb(95, 9, 9);
+    --fighting: rgb(95, 9, 9);
     --poison: rgb(85, 16, 124);
-    --earth: rgb(153, 145, 60);
-    --flight: rgb(85, 74, 128);
-    --psycho: rgb(196, 101, 141);
-    --beetle: rgb(90, 151, 65);
-    --stone: rgb(133, 130, 103);
+    --ground: rgb(153, 145, 60);
+    --flying: rgb(85, 74, 128);
+    --psychic: rgb(196, 101, 141);
+    --bug: rgb(90, 151, 65);
+    --rock: rgb(133, 130, 103);
     --ghost: rgb(90, 12, 126);
     --dragon: rgb(36, 35, 114);
-    --unlight: rgb(129, 79, 22);
+    --dark: rgb(129, 79, 22);
     --steel: rgb(184, 183, 173);
-    --fee: rgb(225, 139, 236);
+    --fairy: rgb(225, 139, 236);
 }
 
 .centerAll {
@@ -71,6 +71,10 @@
     transform: scale(0);
     left: 100%;
     top: 20%;
+}
+
+h2 {
+    color: white;
 }
 
 .arrowBtn {
