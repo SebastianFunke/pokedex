@@ -22,33 +22,36 @@
 
         <article>
             <section>
-                <!--<div w3-include-html="src/templates/nav.html"></div>-->
-                <img id="pokeball" src="src/img/pokeball.png" alt="">
+                <div id="detailPokemon">
+                    <div class="outerDetail">
+                        <p>text</p>
+                    </div>
+                </div>
+
             </section>
 
             <section>
-                <div class="container">
-
-                    <nav class="navbar navbar-light bg-light">
-                        <div class="container-fluid">
-                            <a class="navbar-brand">Pokedex</a>
-                            <form class="d-flex">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            </form>
-                        </div>
-                    </nav>
-
-                    <div id="pokeList" class="row m-3">
 
 
-
-
-
-
-
+                <nav class="navbar navbar-light bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand">Pokedex</a>
+                        <form class="form-controlBox d-flex">
+                            <input class="form-control me-2" type="search" oninput="searchPoke(value)" placeholder="Search" aria-label="Search">
+                        </form>
                     </div>
+                </nav>
+
+                <div id="pokeList" class="row m-3">
+
+
+
+
+
+
 
                 </div>
+
             </section>
 
 
@@ -60,33 +63,7 @@
 
     </footer>
 
-    <!--<div class="language ">
-                                    <button>DEU</button>
-                                    <button>ENG</button>
-                                </div>
-                                <div class="outerBox row ">
-                                    <div class="pokeImgContainer col-4 ">
-                                        <img class="pokeImg " src="src/img/pokeball.png " alt=" ">
-                                    </div>
-                                    <div class="infoBox col-8 ">
-                                        <div class="selector ">
-                                            <button id="arrowBtnUp " class="arrowBtn "><img src="src/img/up.png " alt=" "></button>
-                                            <div class="selectorInfoBox ">
-                                                <div>
-                                                    <img id="pokeGif " src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/329.gif " alt=" " id="gifPoke ">
-                                                </div>
-                                                <p>Nr.322</p>
-                                                <p>Vibrava</p>
-                                                <div class="gender ">
-                                                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/329.gif " alt=" " id="male ">
-                                                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/329.gif " alt=" " id="female ">
-                                                </div>
-                                            </div>
-                                            <button id="arrowBtnDown " class="arrowBtn "><img src="src/img/down.png " alt=" "></button>
-                                        </div>
-                                        <p>details</p>
-                                    </div>
-                                </div>-->
+
 </body>
 
 </html>

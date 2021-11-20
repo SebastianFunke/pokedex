@@ -38,12 +38,21 @@
     --dark: rgb(129, 79, 22);
     --steel: rgb(184, 183, 173);
     --fairy: rgb(225, 139, 236);
+    --grey: rgb(138, 138, 138);
 }
 
 .centerAll {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.pokeHead {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: space-around;
 }
 
 .d-none {
@@ -117,15 +126,23 @@ h2 {
     margin: 0;
     border-radius: 8px;
     transition: transform 225ms ease-in-out;
-    background-image: url("../img/pokeball_white.png");
-    background-position: 90% 90%;
-    background-size: 60%;
-    background-repeat: no-repeat;
     cursor: pointer;
 }
 
+.pokePic {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    background-image: url("../img/pokeball2.png");
+    background-position: 50% 50%;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
 .pokecontainer:hover {
-    transform: translateY(-0.5em);
+    transform: scale(1.05);
+    filter: brightness(110%);
+    transition: all 225ms ease-in-out;
 }
 
 body {
@@ -138,10 +155,16 @@ body {
     width: 100%;
 }
 
-.pokePic {
-    width: 100%;
-    height: auto;
-    margin: 0;
+.navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+h3 {
+    color: whitesmoke;
 }
 
 .pokeTypes {
@@ -201,6 +224,39 @@ body {
     flex-wrap: nowrap;
 }
 
+.container-fluid {
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+}
+
+.form-controlBox {
+    width: 35% !important;
+    min-width: 200px !important;
+}
+
 .gender img {
     width: 49%;
+}
+
+#pokeList {
+    padding-top: 40px;
+}
+
+#detailPokemon {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.708);
+    z-index: 1000;
+}
+
+.outerDetail {
+    width: 75%;
+    height: 85%;
+    background-color: green;
 }
