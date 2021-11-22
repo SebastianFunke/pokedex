@@ -15,17 +15,39 @@
 
 <!--<body onload="includeHTML()">-->
 
-<body onload="init()">
+<body id="bodyID" onload="init()" onscroll="checkScrollEnd()">
 
     <main>
 
 
         <article>
             <section>
-                <div id="detailPokemon">
-                    <div class="outerDetail">
-                        <p>text</p>
+                <div id="detailPokemon" class="d-none">
+
+                    <div class="outerDetail" onclick="detailEnd()">
+                        <div class="detailTop">
+                            <div class="detailText">
+                                <p id="pokeId">id</p>
+                                <h2 id="pokeName">name</h2>
+                            </div>
+                            <img id="detailImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="">
+                        </div>
+                        <div>
+                            <div class="line row">
+                            </div>
+                            <div class="line row">
+                            </div>
+                            <div class="line row">
+                            </div>
+                            <div class="line row">
+                            </div>
+                            <div class="line row">
+                            </div>
+                            <div class="line row">
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
             </section>
@@ -33,7 +55,7 @@
             <section>
 
 
-                <nav class="navbar navbar-light bg-light">
+                <nav id="navBar" class="navbar navbar-light bg-light">
                     <div class="container-fluid">
                         <a class="navbar-brand">Pokedex</a>
                         <form class="form-controlBox d-flex">
@@ -51,7 +73,7 @@
 
 
                 </div>
-
+                <button onclick="loadPokeGroup()">mehr</button>
             </section>
 
 

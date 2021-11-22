@@ -11,23 +11,41 @@ let centerColor = 'grey'
 let responseGroup = [];
 let searchedPokemons = [];
 
-function init() {
-    loadAllPokemons();
 
+/**
+ * function loaded at first
+ */
+async function init() {
+    await loadAllPokemons();
     loadPokeGroup();
-    console.log(responseGroup);
 }
 
+
 async function loadPokeGroup() {
+    /*
     let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
     offset += 20;
     let response = await fetch(url);
-    responseGroup = await response.json();
-    for (let i = 0; i < responseGroup['results'].length; i++) {
-        loadPokemon(responseGroup['results'][i]['name']);
-
+    responseGroup = await response.json();*/
+    console.log(allPokemons);
+    for (let i = 0; i < limit; i++) {
+        loadPokemon(allPokemons['results'][offset + i]['name']);
+        console.log(offset + i);
     }
+    offset += limit;
+}
 
+function checkScrollEnd() {
+    let bodyID = document.getElementById('pokeList');
+
+    /*if (window.scrollY + document.documentElement.clientHeight >= document.documentElement.offsetHeight) {
+        console.log('scrollend');
+        window.scrollY -= 20;
+        loadPokeGroup();
+
+
+
+    }*/
 }
 
 
@@ -36,20 +54,17 @@ async function loadAllPokemons() {
     let response = await fetch(url);
     allPokemons = await response.json();
     console.log(allPokemons);
-
 }
 
 function searchPoke(val) {
+    document.getElementById('pokeList').innerHTML = '';
     searchedPokemons = [];
     for (var i = 0; i < allPokemons['results'].length; i++) {
         if (allPokemons['results'][i]['name'].includes(val)) {
-            console.log(allPokemons['results'][i]['name']);
             searchedPokemons.push(allPokemons['results'][i]['name']);
-
         }
-        console.log(searchedPokemons);
     }
-    document.getElementById('pokeList').innerHTML = '';
+
     for (let i = 0; i < searchedPokemons.length; i++) {
         if (i > 31) { break; }
         loadPokemon(searchedPokemons[i]);
@@ -62,7 +77,6 @@ async function loadPokemon(name) {
     let response = await fetch(url);
     currentPokemon = await response.json();
     pname = currentPokemon['name'];
-    console.log(currentPokemon);
     types = [];
     colors = [];
     for (let i = 0; i < currentPokemon['types'].length; i++) {
@@ -90,8 +104,41 @@ function getColorSnippet() {
     return returnString;
 }
 
-function loadPokedetails(pokename) {
-    console.log(pokename);
+async function loadPokedetails(pokename) {
+    let url = `https://pokeapi.co/api/v2/pokemon/${pokename}`;
+    let response = await fetch(url);
+    currentPokemon = await response.json();
+    let progressBars = document.getElementsByClassName('line');
+    for (let i = 0; i < progressBars.length; i++) {
+        progressBars[i].innerHTML = getBar(currentPokemon['stats'][i]['stat']['name'], currentPokemon['stats'][i]['base_stat'])
+    }
+    document.getElementById('detailImg').src = currentPokemon['sprites']['front_default'];
+    document.getElementById('pokeId').innerText = '#' + currentPokemon['id'];
+    document.getElementById('pokeName').innerText = currentPokemon['name'];
+    document.getElementById('detailPokemon').classList.toggle('d-none');
+    blurred();
+}
+
+function getBar(text, val) {
+    let valPercent = val * 0.5;
+    return `
+    <p class="col-4">${text}</p>
+    <div class="progress col-7">
+        <div class="progress-bar" role="progressbar" style="width: ${valPercent}%; background-color: var(--${text});" aria-valuenow="25" aria-valuemin="0" aria-valuemax="200">${val}</div>
+    </div>
+    `
+}
+
+
+function blurred() {
+    document.getElementById('navBar').classList.toggle('blurred');
+    document.getElementById('pokeList').classList.toggle('blurred');
+}
+
+function detailEnd() {
+    document.getElementById('detailPokemon').classList.toggle('d-none');
+    blurred();
+
 }
 
 function getSnippet(pokename, spriteAdress) {
