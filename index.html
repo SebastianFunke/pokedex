@@ -8,9 +8,9 @@
     <link rel="stylesheet" type="text/css" href="src\css\styles.css">
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="icon" href="src/img/pokeball.png">
-    <script src="src/js/include.js"></script>
     <script src="src/js/script.js"></script>
     <script src="src/js/localStorage.js"></script>
+
 </head>
 
 <!--<body onload="includeHTML()">-->
@@ -21,36 +21,7 @@
 
 
         <article>
-            <section>
-                <div id="detailPokemon" class="d-none">
 
-                    <div class="outerDetail" onclick="detailEnd()">
-                        <div class="detailTop">
-                            <div class="detailText">
-                                <p id="pokeId">id</p>
-                                <h2 id="pokeName">name</h2>
-                            </div>
-                            <img id="detailImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="">
-                        </div>
-                        <div>
-                            <div class="line row">
-                            </div>
-                            <div class="line row">
-                            </div>
-                            <div class="line row">
-                            </div>
-                            <div class="line row">
-                            </div>
-                            <div class="line row">
-                            </div>
-                            <div class="line row">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </section>
 
             <section>
 
@@ -59,7 +30,7 @@
                     <div class="container-fluid">
                         <a class="navbar-brand">Pokedex</a>
                         <form class="form-controlBox d-flex">
-                            <input class="form-control me-2" type="search" oninput="searchPoke(value)" placeholder="Search" aria-label="Search">
+                            <input id="inputSearch" class="form-control me-2" type="search" oninput="searchPoke(value)" placeholder="Search" aria-label="Search">
                         </form>
                     </div>
                 </nav>

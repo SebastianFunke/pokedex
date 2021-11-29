@@ -252,7 +252,7 @@ h3 {
 }
 
 #pokeList {
-    padding-top: 40px;
+    padding-top: calc(40px + 0.6em);
 }
 
 #detailPokemon {
@@ -264,7 +264,6 @@ h3 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(20, 20, 20, 0.108);
     z-index: 1000;
 }
 
@@ -272,9 +271,7 @@ h3 {
     width: 75%;
     height: 85%;
     border-radius: 8px;
-    background-color: rgba(20, 20, 20, 0.508);
     display: flex;
-    align-items: stretch;
     flex-direction: column;
     justify-content: center;
 }
@@ -291,6 +288,7 @@ h3 {
     border-end-end-radius: 8px;
     border-start-end-radius: 8px;
     font-size: larger;
+    width: 100%;
 }
 
 .progress {
@@ -299,25 +297,12 @@ h3 {
     padding-left: 0 !important;
 }
 
-.line {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.line p {
-    margin: 0;
-    color: whitesmoke;
-    font-size: larger;
-}
-
 .detailTop {
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    height: 90%;
+    height: 80%;
 }
 
 #pokeId {
@@ -333,11 +318,80 @@ h3 {
 }
 
 #detailImg {
-    height: 100% !important;
-    width: auto;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
 }
 
 .detailText p,
 h2 {
-    margin: 0 !important;
+    margin-top: 0.2em !important;
+    margin-bottom: 0.5em !important;
+}
+
+.detailText h2 {
+    font-size: 4em;
+    text-shadow: 3px 3px 3px #06050e;
+}
+
+.detailImgBlock {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: start;
+    width: 100%;
+}
+
+.line p {
+    margin: 0;
+    color: whitesmoke;
+    font-size: larger;
+}
+
+.pixel {
+    position: absolute;
+    height: 0.1em;
+    width: 0.1em;
+    background-color: rgb(244, 248, 9);
+    border-radius: 100%;
+    border: 0.1em solid rgba(248, 248, 248, 0.808);
+    filter: blur(4px);
+    left: 50vw;
+}
+
+#detailBody {
+    background-image: url(../img/forest.jpg);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.abilityParagraph {
+    color: whitesmoke;
+}
+
+link {
+    background-color: transparent;
+    border: none;
+    z-index: 11000;
+    cursor: pointer;
+    position: absolute;
+    right: 5vw;
+    top: 5vh;
+}
+
+link:hover {
+    filter: brightness(60%);
 }

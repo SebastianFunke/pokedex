@@ -4,22 +4,28 @@ let pname;
 let types = [];
 let colors = [];
 let offset = 0;
-let limit = 30;
+let limit = 20;
 let adress;
 let id;
 let centerColor = 'grey'
 let responseGroup = [];
 let searchedPokemons = [];
-
+let localPoke = 'detailPoke';
+let searchedPoke;
+let searchedPokeLocal = 'searched';
 
 /**
  * function loaded at first
  */
 async function init() {
     await loadAllPokemons();
-    loadPokeGroup();
+    if (loadArrayFromLocalStorage(searchedPokeLocal)) {
+        searchPoke(loadArrayFromLocalStorage(searchedPokeLocal));
+        document.getElementById('inputSearch').value = loadArrayFromLocalStorage(searchedPokeLocal);
+    } else {
+        loadPokeGroup();
+    }
 }
-
 
 async function loadPokeGroup() {
     /*
@@ -57,6 +63,8 @@ async function loadAllPokemons() {
 }
 
 function searchPoke(val) {
+    console.log('aba' + loadArrayFromLocalStorage(searchedPokeLocal));
+    saveArrayToLocalStorage(searchedPokeLocal, val)
     document.getElementById('pokeList').innerHTML = '';
     searchedPokemons = [];
     for (var i = 0; i < allPokemons['results'].length; i++) {
@@ -76,6 +84,7 @@ async function loadPokemon(name) {
     let url = `https://pokeapi.co/api/v2/pokemon/${name}`;
     let response = await fetch(url);
     currentPokemon = await response.json();
+    console.log(currentPokemon);
     pname = currentPokemon['name'];
     types = [];
     colors = [];
@@ -104,7 +113,8 @@ function getColorSnippet() {
     return returnString;
 }
 
-async function loadPokedetails(pokename) {
+async function loadPokedetails() {
+    pokename = loadArrayFromLocalStorage(localPoke);
     let url = `https://pokeapi.co/api/v2/pokemon/${pokename}`;
     let response = await fetch(url);
     currentPokemon = await response.json();
@@ -116,34 +126,61 @@ async function loadPokedetails(pokename) {
     document.getElementById('pokeId').innerText = '#' + currentPokemon['id'];
     document.getElementById('pokeName').innerText = currentPokemon['name'];
     document.getElementById('detailPokemon').classList.toggle('d-none');
-    blurred();
+    displayData(pokename);
 }
 
 function getBar(text, val) {
     let valPercent = val * 0.5;
     return `
-    <p class="col-4">${text}</p>
-    <div class="progress col-7">
+    <p class="col-3">${text}</p>
+    <div class="progress col-8">
         <div class="progress-bar" role="progressbar" style="width: ${valPercent}%; background-color: var(--${text});" aria-valuenow="25" aria-valuemin="0" aria-valuemax="200">${val}</div>
     </div>
     `
 }
+//todo: schleife für abilities
+async function displayData(pokename) {
+    let url = `https://pokeapi.co/api/v2/pokemon/${pokename}`;
+    let response = await fetch(url);
+    currentPokemon = await response.json();
+    console.log(currentPokemon['abilities'].length);
+
+    for (let i = 0; i < currentPokemon['abilities'].length; i++) {
+        document.getElementById('detailData').innerHTML += getDataAbility(currentPokemon['abilities'][i]['ability']['name']);
+    }
+    if (currentPokemon['types'].length > 1) {
+        document.getElementById('detailTypes').innerHTML += `<h2>Typen:</h2>`
+    } else {
+        document.getElementById('detailTypes').innerHTML += `<h2>Typ:</h2>`
+    }
+    for (let i = 0; i < currentPokemon['types'].length; i++) {
+        document.getElementById('detailTypes').innerHTML += getDataAbility(currentPokemon['types'][i]['type']['name']);
+    }
 
 
-function blurred() {
-    document.getElementById('navBar').classList.toggle('blurred');
-    document.getElementById('pokeList').classList.toggle('blurred');
 }
 
+function getDataAbility(ability) {
+    return `
+    <p class="abilityParagraph">${ability}</p>    
+    `
+}
+
+function getDataTypes(type) {
+    return `
+    <p class="abilityParagraph">${type}</p>    
+    `
+}
+
+
 function detailEnd() {
-    document.getElementById('detailPokemon').classList.toggle('d-none');
-    blurred();
+
 
 }
 
 function getSnippet(pokename, spriteAdress) {
     return `<div class="mb-3 col-xl-3 col-lg-4 col-md-6">
-    <div class="pokecontainer" onclick="loadPokedetails('${pokename}')" style="background: linear-gradient(140deg, var(--${colors[0]}) 0%, var(--${colors[0]}) 40%,var(--${centerColor}) 50%,var(--${colors[1]}) 60%,var(--${colors[1]}) 100%);">
+    <div class="pokecontainer" onclick="openDetailSite('${pokename}')" style="background: linear-gradient(140deg, var(--${colors[0]}) 0%, var(--${colors[0]}) 40%,var(--${centerColor}) 50%,var(--${colors[1]}) 60%,var(--${colors[1]}) 100%);">
     <div class="m-1 pokeHead">
             <h3>#${id}<h3>
             <h2>${pokename}</h2>
@@ -159,4 +196,40 @@ function getSnippet(pokename, spriteAdress) {
         </div>
     </div>
 </div>`;
+}
+
+
+
+
+function detailBg() {
+    randomizePixel();
+    setInterval(movePixel, 15);
+    console.log('pixel');
+    loadPokedetails();
+}
+
+function movePixel() {
+    let pixel = document.getElementsByClassName('pixel');
+    for (let i = 0; i < pixel.length; i++) {
+        pixel[i].style.left = (pixel[i].offsetLeft + (Math.random() * 5) - 2) + 'px';
+
+        pixel[i].style.top = (pixel[i].offsetTop + Math.random() * 10) - 4 + 'px';
+        if (pixel[i].offsetTop > window.innerHeight || pixel[i].offsetTop < 0 || pixel[i].offsetLeft > window.innerWidth || pixel[i].offsetLeft < 0) {
+            pixel[i].style.top = window.innerHeight * Math.random() + 'px';
+            pixel[i].style.left = (Math.random() * window.innerWidth) + 'px';
+        }
+    }
+}
+
+function randomizePixel() {
+    let pixel = document.getElementsByClassName('pixel');
+    for (let i = 0; i < pixel.length; i++) {
+        pixel[i].style.top = (window.innerHeight - 30) * Math.random() + 'px';
+        pixel[i].style.left = (window.innerWidth - 30) * Math.random() + 'px';
+    }
+}
+
+function openDetailSite(inputPoke) {
+    saveArrayToLocalStorage(localPoke, inputPoke);
+    window.location.href = 'details.html';
 }
