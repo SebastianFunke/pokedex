@@ -6,13 +6,12 @@ let colors = [];
 let offset = 0;
 let limit = 20;
 let adress;
-let id;
 let centerColor = 'grey'
 let responseGroup = [];
 let searchedPokemons = [];
 let localPoke = 'detailPoke';
 let searchedPokeLocal = 'searched';
-
+let searchPos = 0;
 /**
  * function loaded at first
  */
@@ -24,6 +23,7 @@ async function init() {
     } else {
         loadPokeGroup();
     }
+
 }
 
 async function loadPokeGroup() {
@@ -32,37 +32,34 @@ async function loadPokeGroup() {
     offset += 20;
     let response = await fetch(url);
     responseGroup = await response.json();*/
-    console.log(allPokemons);
-    for (let i = 0; i < limit; i++) {
-        loadPokemon(allPokemons['results'][offset + i]['name']);
-        console.log(offset + i);
+    if (document.getElementById('inputSearch').value == '') {
+        for (let i = 0; i < limit; i++) {
+            loadPokemon(allPokemons['results'][offset + i]['name']);
+        }
+        offset += limit;
+    } else {
+        for (let i = 2; i < searchedPokemons.length - searchPos; i++) {
+            console.log(searchPos);
+            console.log(searchedPokemons.length - searchPos);
+            if (i > 19) { break; }
+            loadPokemon(searchedPokemons[searchPos]);
+            searchPos++;
+        }
     }
-    offset += limit;
 }
-
-function checkScrollEnd() {
-    let bodyID = document.getElementById('pokeList');
-
-    /*if (window.scrollY + document.documentElement.clientHeight >= document.documentElement.offsetHeight) {
-        console.log('scrollend');
-        window.scrollY -= 20;
-        loadPokeGroup();
-
-
-
-    }*/
-}
-
 
 async function loadAllPokemons() {
     let url = `https://pokeapi.co/api/v2/pokemon?limit=2000`;
     let response = await fetch(url);
     allPokemons = await response.json();
-    console.log(allPokemons);
 }
 
-function searchPoke(val) {
-    console.log('aba' + loadArrayFromLocalStorage(searchedPokeLocal));
+async function searchPoke() {
+    await new Promise(resolve => setTimeout(resolve, 100));
+    let val = document.getElementById('inputSearch').value;
+    console.log(val);
+    searchPos = 0;
+    offset = limit;
     saveArrayToLocalStorage(searchedPokeLocal, val)
     document.getElementById('pokeList').innerHTML = '';
     searchedPokemons = [];
@@ -74,7 +71,8 @@ function searchPoke(val) {
 
     for (let i = 0; i < searchedPokemons.length; i++) {
         if (i > 19) { break; }
-        loadPokemon(searchedPokemons[i]);
+        loadPokemon(searchedPokemons[searchPos]);
+        searchPos++;
     }
 
 }
@@ -83,7 +81,6 @@ async function loadPokemon(name) {
     let url = `https://pokeapi.co/api/v2/pokemon/${name}`;
     let response = await fetch(url);
     currentPokemon = await response.json();
-    console.log(currentPokemon);
     pname = currentPokemon['name'];
     types = [];
     colors = [];
@@ -97,11 +94,7 @@ async function loadPokemon(name) {
     } else {
         centerColor = 'grey';
     }
-
     adress = getSprite();
-    console.log('Picture Adress: ' + adress);
-
-    id = currentPokemon['id'];
     document.getElementById('pokeList').innerHTML += getSnippet(pname, adress);
 }
 
@@ -117,7 +110,6 @@ function getColorSnippet() {
 
 function getSprite() {
     if (currentPokemon['sprites']['other']['home']['front_default']) {
-
         return adress = currentPokemon['sprites']['other']['home']['front_default'];
     } else {
         return adress = currentPokemon['sprites']['front_default'];
@@ -135,10 +127,9 @@ async function loadPokedetails() {
         progressBars[i].innerHTML = getBar(currentPokemon['stats'][i]['stat']['name'], currentPokemon['stats'][i]['base_stat'])
     }
     document.getElementById('detailImg').src = getSprite();
-    document.getElementById('pokeId').innerText = '#' + currentPokemon['id'];
     document.getElementById('pokeName').innerText = currentPokemon['name'];
-
     displayData(pokename);
+    setTitle(currentPokemon['name']);
 }
 
 function getBar(text, val) {
@@ -150,26 +141,22 @@ function getBar(text, val) {
     </div>
     `
 }
-//todo: schleife für abilities
+
 async function displayData(pokename) {
     let url = `https://pokeapi.co/api/v2/pokemon/${pokename}`;
     let response = await fetch(url);
     currentPokemon = await response.json();
-    console.log(currentPokemon['abilities'].length);
-
     for (let i = 0; i < currentPokemon['abilities'].length; i++) {
         document.getElementById('detailData').innerHTML += getDataAbility(currentPokemon['abilities'][i]['ability']['name']);
     }
     if (currentPokemon['types'].length > 1) {
-        document.getElementById('detailTypes').innerHTML += `<h2>Typen:</h2>`
+        document.getElementById('detailTypes').innerHTML += `<h3>Typen:</h3>`
     } else {
         document.getElementById('detailTypes').innerHTML += `<h2>Typ:</h2>`
     }
     for (let i = 0; i < currentPokemon['types'].length; i++) {
         document.getElementById('detailTypes').innerHTML += getDataAbility(currentPokemon['types'][i]['type']['name']);
     }
-
-
 }
 
 function getDataAbility(ability) {
@@ -184,17 +171,10 @@ function getDataTypes(type) {
     `
 }
 
-
-function detailEnd() {
-
-
-}
-
 function getSnippet(pokename, spriteAdress) {
     return `<div class="mb-3 col-xl-3 col-lg-4 col-md-6">
     <div class="pokecontainer" onclick="openDetailSite('${pokename}')" style="background: linear-gradient(140deg, var(--${colors[0]}) 0%, var(--${colors[0]}) 40%,var(--${centerColor}) 50%,var(--${colors[1]}) 60%,var(--${colors[1]}) 100%);">
     <div class="m-1 pokeHead">
-            <h3>#${id}<h3>
             <h2>${pokename}</h2>
         </div>
         <div class="pokeContainerLowerBox row ">
@@ -215,9 +195,13 @@ function getSnippet(pokename, spriteAdress) {
 
 function detailBg() {
     randomizePixel();
-    setInterval(movePixel, 15);
-    console.log('pixel');
+    setInterval(movePixel, 20);
     loadPokedetails();
+    setTitle();
+}
+
+function setTitle(titleName) {
+    document.title = titleName;
 }
 
 function movePixel() {
@@ -225,8 +209,8 @@ function movePixel() {
     for (let i = 0; i < pixel.length; i++) {
         pixel[i].style.left = (pixel[i].offsetLeft + (Math.random() * 5) - 2) + 'px';
         pixel[i].style.top = (pixel[i].offsetTop + Math.random() * 10) - 4 + 'px';
-        let windowHeightReset = window.innerHeight - 50;
-        let windowWidthReset = window.innerWidth - 50;
+        let windowHeightReset = window.innerHeight - 170;
+        let windowWidthReset = window.innerWidth - 170;
         if (pixel[i].offsetTop > windowHeightReset || pixel[i].offsetTop < 0 || pixel[i].offsetLeft > windowWidthReset || pixel[i].offsetLeft < 0) {
             pixel[i].style.top = windowHeightReset * Math.random() + 'px';
             pixel[i].style.left = (Math.random() * windowWidthReset) + 'px';
@@ -237,9 +221,8 @@ function movePixel() {
 function randomizePixel() {
     let pixel = document.getElementsByClassName('pixel');
     for (let i = 0; i < pixel.length; i++) {
-        pixel[i].style.top = (window.innerHeight - 30) * Math.random() + 'px';
-        pixel[i].style.left = (window.innerWidth - 30) * Math.random() + 'px';
-        console.log('bla:' + (window.innerWidth - 30));
+        pixel[i].style.top = (window.innerHeight * 0.8) * Math.random() + 'px';
+        pixel[i].style.left = (window.innerWidth * 0.8) * Math.random() + 'px';
     }
 }
 

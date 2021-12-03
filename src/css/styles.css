@@ -298,15 +298,17 @@ h3 {
 
 #pokeId {
     color: whitesmoke;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .detailText {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: row;
+    margin-left: 2em;
+    width: 95%;
 }
+
+.detailTextContainer {}
 
 #detailImg {
     object-fit: contain;
@@ -321,7 +323,7 @@ h2 {
 }
 
 .detailText h2 {
-    font-size: 4em;
+    font-size: 3em;
     text-shadow: 3px 3px 3px #06050e;
 }
 
@@ -360,9 +362,17 @@ h2 {
     width: 0.1em;
     background-color: rgb(244, 248, 9);
     border-radius: 100%;
-    border: 0.1em solid rgba(248, 248, 248, 0.808);
+    border: 0.1em solid rgb(248, 248, 248);
     filter: blur(4px);
     left: 50vw;
+}
+
+.line {
+    width: 98%;
+}
+
+.overHidden {
+    overflow: hidden;
 }
 
 #detailBody {
@@ -370,7 +380,8 @@ h2 {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 99vh;
+    overflow: hidden;
 }
 
 .detailBody {
@@ -393,4 +404,30 @@ h2 {
 
 .link:hover {
     filter: brightness(60%);
+}
+
+.detailLeft {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loadMoreContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 2em;
+}
+
+.loadMoreBtn {
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 16px 24px;
+}
+
+.loadMoreBtn:hover {
+    background-color: rgb(179, 179, 179);
+    border-color: rgb(71, 31, 12);
+    color: rgb(100, 43, 16);
 }

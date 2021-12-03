@@ -15,7 +15,7 @@
 
 <!--<body onload="includeHTML()">-->
 
-<body id="bodyID" onload="init()" onscroll="checkScrollEnd()">
+<body id="bodyID" onload="init()">
 
     <main>
 
@@ -30,7 +30,7 @@
                     <div class="container-fluid">
                         <a class="navbar-brand">Pokedex</a>
                         <form class="form-controlBox d-flex">
-                            <input id="inputSearch" class="form-control me-2" type="search" oninput="searchPoke(value)" placeholder="Search" aria-label="Search">
+                            <input id="inputSearch" class="form-control me-2" type="search" oninput="searchPoke()" placeholder="Search" aria-label="Search">
                         </form>
                     </div>
                 </nav>
@@ -44,7 +44,9 @@
 
 
                 </div>
-                <button onclick="loadPokeGroup()">mehr</button>
+                <div class="loadMoreContainer">
+                    <button class="loadMoreBtn" onclick="loadPokeGroup()">mehr</button>
+                </div>
             </section>
 
 

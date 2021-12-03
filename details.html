@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="detailBg()">
+<body onload="detailBg()" class="overHidden">
     <div>
         <div class="pixel"></div>
         <div class="pixel"></div>
@@ -39,209 +39,63 @@
         <div class="pixel"></div>
         <div class="pixel"></div>
         <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
-        <div class="pixel"></div>
     </div>
-    <section id="detailBody">
+    <section id="detailBody" class="row">
 
 
 
-        <div class="row">
-            <div class="col-6">
 
-                <div class="detailText">
-                    <p id="pokeId">id</p>
+        <div class="col-md-6  detailLeft">
+
+            <div class="detailText">
+                <div class="detailTextContainer">
                     <h2 id="pokeName">name</h2>
                     <div id="detailData">
-                        <h2>Fähigkeiten:</h2>
+                        <h3>Fähigkeiten:</h3>
                     </div>
                     <div id="detailTypes">
-
                     </div>
                 </div>
             </div>
 
-            <div class="col-6">
-                <img id="detailImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="">
+
+            <div class="lineContainer">
+
+                <div class="line centerAll">
+                </div>
+                <div class="line centerAll">
+                </div>
+                <div class="line centerAll">
+                </div>
+                <div class="line centerAll">
+                </div>
+                <div class="line centerAll">
+                </div>
+                <div class="line centerAll">
+                </div>
 
             </div>
 
         </div>
 
-        <div class="row">
-            <div class="col-6">
-                <div class="lineContainer">
-
-                    <div class="line ">
-                    </div>
-                    <div class="line ">
-                    </div>
-                    <div class="line ">
-                    </div>
-                    <div class="line ">
-                    </div>
-                    <div class="line ">
-                    </div>
-                    <div class="line ">
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-6">
-                <canvas id="myChart" width="400" height="400"></canvas>
-            </div>
+        <div class="col-md-6 centerAll">
+            <img id="detailImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="">
 
         </div>
 
 
 
-        <script>
-            const config = {
-                type: 'radar',
-                data: data,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Chart.js Radar Chart'
-                        }
-                    }
-                },
-            };
-
-            const DATA_COUNT = 7;
-            const NUMBER_CFG = {
-                count: DATA_COUNT,
-                min: 0,
-                max: 100
-            };
-
-            const labels = Utils.months({
-                count: 7
-            });
-            const data = {
-                labels: labels,
-                datasets: [{
-                    label: 'Dataset 1',
-                    data: Utils.numbers(NUMBER_CFG),
-                    borderColor: Utils.CHART_COLORS.red,
-                    backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
-                }, {
-                    label: 'Dataset 2',
-                    data: Utils.numbers(NUMBER_CFG),
-                    borderColor: Utils.CHART_COLORS.blue,
-                    backgroundColor: Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
-                }]
-            };
-
-            const actions = [{
-                name: 'Randomize',
-                handler(chart) {
-                    chart.data.datasets.forEach(dataset => {
-                        dataset.data = Utils.numbers({
-                            count: chart.data.labels.length,
-                            min: 0,
-                            max: 100
-                        });
-                    });
-                    chart.update();
-                }
-            }, {
-                name: 'Add Dataset',
-                handler(chart) {
-                    const data = chart.data;
-                    const dsColor = Utils.namedColor(chart.data.datasets.length);
-                    const newDataset = {
-                        label: 'Dataset ' + (data.datasets.length + 1),
-                        backgroundColor: Utils.transparentize(dsColor, 0.5),
-                        borderColor: dsColor,
-                        data: Utils.numbers({
-                            count: data.labels.length,
-                            min: 0,
-                            max: 100
-                        }),
-                    };
-                    chart.data.datasets.push(newDataset);
-                    chart.update();
-                }
-            }, {
-                name: 'Add Data',
-                handler(chart) {
-                    const data = chart.data;
-                    if (data.datasets.length > 0) {
-                        data.labels = Utils.months({
-                            count: data.labels.length + 1
-                        });
-
-                        for (let index = 0; index < data.datasets.length; ++index) {
-                            data.datasets[index].data.push(Utils.rand(0, 100));
-                        }
-
-                        chart.update();
-                    }
-                }
-            }, {
-                name: 'Remove Dataset',
-                handler(chart) {
-                    chart.data.datasets.pop();
-                    chart.update();
-                }
-            }, {
-                name: 'Remove Data',
-                handler(chart) {
-                    chart.data.labels.splice(-1, 1); // remove the label first
-
-                    chart.data.datasets.forEach(dataset => {
-                        dataset.data.pop();
-                    });
-
-                    chart.update();
-                }
-            }];
-
-            const myChart = new Chart(
-                document.getElementById('myChart'),
-                config
-            );
-        </script>
 
 
 
 
-        <!--
+
+        </div>
+
+    </section>
+
+
+    <!--
         <div class="outerDetail">
 
 
@@ -290,9 +144,9 @@
 
     </section>
     -->
-        <section>
-            <a class="link" href="index.html"><img src="src/img/left2.png" alt=""></a>
-        </section>
+    <section>
+        <a class="link" href="index.html"><img src="src/img/left2.png" alt=""></a>
+    </section>
 
 </body>
 
