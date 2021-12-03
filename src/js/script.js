@@ -66,7 +66,6 @@ async function loadAllPokemons() {
  */
 async function searchPoke() {
     await new Promise(resolve => setTimeout(resolve, 100));
-    document.getElementById('loadMoreContainer').classList.remove('d-none');
     clearElements();
     for (var i = 0; i < allPokemons['results'].length; i++) {
         if (allPokemons['results'][i]['name'].includes(val)) {
@@ -94,7 +93,9 @@ function checkMoreBtnHide() {
  * clear and reset variables for the searchPoke function
  */
 function clearElements() {
-    val = document.getElementById('inputSearch').value;
+    document.getElementById('loadMoreContainer').classList.remove('d-none');
+    val = document.getElementById('inputSearch').value.toLowerCase();
+    console.log(val);
     searchPos = 0;
     offset = limit;
     saveArrayToLocalStorage(searchedPokeLocal, val)
@@ -160,7 +161,7 @@ function getSprite() {
 }
 
 /**
- * 
+ * this function generates and returns a container with name, types, colors and image of a pokemon
  * @param {String} pokename - name of the pokemon
  * @param {String} spriteAdress - internetadress of the sprite
  * @returns String - html code to display a container with the specific name of the pokemon
@@ -286,7 +287,7 @@ function movePixel() {
 }
 
 /**
- * 
+ * sets the pixel on random position of the screen
  */
 function randomizePixel() {
     let pixel = document.getElementsByClassName('pixel');
