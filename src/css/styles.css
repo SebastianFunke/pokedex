@@ -267,15 +267,6 @@ h3 {
     z-index: 1000;
 }
 
-.outerDetail {
-    width: 75%;
-    height: 85%;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .arrow:hover {
     filter: brightness(0.5);
 }
@@ -319,8 +310,8 @@ h3 {
 
 #detailImg {
     object-fit: contain;
-    width: 100%;
-    height: 100%;
+    width: 35vw;
+    height: auto;
 }
 
 .detailText p,
@@ -339,22 +330,28 @@ h2 {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: row;
 }
 
-.line {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: start;
-    width: 100%;
+@media(max-width: 900px) {
+    .detailImgBlock {
+        flex-direction: column;
+    }
 }
 
 .line p {
     margin: 0;
     color: whitesmoke;
     font-size: larger;
+}
+
+.lineContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .pixel {
@@ -373,16 +370,18 @@ h2 {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: hidden;
     height: 100vh;
-    width: 100vw;
+}
+
+.detailBody {
+    height: 100vh;
 }
 
 .abilityParagraph {
     color: whitesmoke;
 }
 
-link {
+.link {
     background-color: transparent;
     border: none;
     z-index: 11000;
@@ -392,6 +391,6 @@ link {
     top: 5vh;
 }
 
-link:hover {
+.link:hover {
     filter: brightness(60%);
 }

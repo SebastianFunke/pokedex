@@ -11,7 +11,6 @@ let centerColor = 'grey'
 let responseGroup = [];
 let searchedPokemons = [];
 let localPoke = 'detailPoke';
-let searchedPoke;
 let searchedPokeLocal = 'searched';
 
 /**
@@ -74,7 +73,7 @@ function searchPoke(val) {
     }
 
     for (let i = 0; i < searchedPokemons.length; i++) {
-        if (i > 31) { break; }
+        if (i > 19) { break; }
         loadPokemon(searchedPokemons[i]);
     }
 
@@ -98,7 +97,10 @@ async function loadPokemon(name) {
     } else {
         centerColor = 'grey';
     }
-    let adress = currentPokemon['sprites']['front_default'];
+
+    adress = getSprite();
+    console.log('Picture Adress: ' + adress);
+
     id = currentPokemon['id'];
     document.getElementById('pokeList').innerHTML += getSnippet(pname, adress);
 }
@@ -113,6 +115,16 @@ function getColorSnippet() {
     return returnString;
 }
 
+function getSprite() {
+    if (currentPokemon['sprites']['other']['home']['front_default']) {
+
+        return adress = currentPokemon['sprites']['other']['home']['front_default'];
+    } else {
+        return adress = currentPokemon['sprites']['front_default'];
+    }
+}
+
+
 async function loadPokedetails() {
     pokename = loadArrayFromLocalStorage(localPoke);
     let url = `https://pokeapi.co/api/v2/pokemon/${pokename}`;
@@ -122,10 +134,10 @@ async function loadPokedetails() {
     for (let i = 0; i < progressBars.length; i++) {
         progressBars[i].innerHTML = getBar(currentPokemon['stats'][i]['stat']['name'], currentPokemon['stats'][i]['base_stat'])
     }
-    document.getElementById('detailImg').src = currentPokemon['sprites']['front_default'];
+    document.getElementById('detailImg').src = getSprite();
     document.getElementById('pokeId').innerText = '#' + currentPokemon['id'];
     document.getElementById('pokeName').innerText = currentPokemon['name'];
-    document.getElementById('detailPokemon').classList.toggle('d-none');
+
     displayData(pokename);
 }
 
@@ -212,11 +224,12 @@ function movePixel() {
     let pixel = document.getElementsByClassName('pixel');
     for (let i = 0; i < pixel.length; i++) {
         pixel[i].style.left = (pixel[i].offsetLeft + (Math.random() * 5) - 2) + 'px';
-
         pixel[i].style.top = (pixel[i].offsetTop + Math.random() * 10) - 4 + 'px';
-        if (pixel[i].offsetTop > window.innerHeight || pixel[i].offsetTop < 0 || pixel[i].offsetLeft > window.innerWidth || pixel[i].offsetLeft < 0) {
-            pixel[i].style.top = window.innerHeight * Math.random() + 'px';
-            pixel[i].style.left = (Math.random() * window.innerWidth) + 'px';
+        let windowHeightReset = window.innerHeight - 50;
+        let windowWidthReset = window.innerWidth - 50;
+        if (pixel[i].offsetTop > windowHeightReset || pixel[i].offsetTop < 0 || pixel[i].offsetLeft > windowWidthReset || pixel[i].offsetLeft < 0) {
+            pixel[i].style.top = windowHeightReset * Math.random() + 'px';
+            pixel[i].style.left = (Math.random() * windowWidthReset) + 'px';
         }
     }
 }
@@ -226,6 +239,7 @@ function randomizePixel() {
     for (let i = 0; i < pixel.length; i++) {
         pixel[i].style.top = (window.innerHeight - 30) * Math.random() + 'px';
         pixel[i].style.left = (window.innerWidth - 30) * Math.random() + 'px';
+        console.log('bla:' + (window.innerWidth - 30));
     }
 }
 
